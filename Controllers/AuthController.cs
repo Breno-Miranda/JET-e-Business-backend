@@ -32,23 +32,39 @@ namespace backend.Controllers
         public ActionResult<ResponseLogin> Login(RequestLogin requestLogin)
         {
             var responseLogin = new ResponseLogin();
+            using (var db = new MySqlContext())
             {
-              
-                var claimList = new List<Claim>();
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SecretKey"]));
-                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-                var expireDate = DateTime.UtcNow.AddDays(1);
-                var timeStamp = DateUtil.ConvertToTimeStamp(expireDate);
-                var token = new JwtSecurityToken(
-                    claims: claimList,
-                    notBefore: DateTime.UtcNow,
-                    expires: expireDate,
-                    signingCredentials: creds);
-                responseLogin.Success = true;
-                responseLogin.Token = new JwtSecurityTokenHandler().WriteToken(token);
-                responseLogin.ExpireDate = timeStamp;
-             
-               
+            var existingUser = db.User.SingleOrDefault(x => x.Email == requestLogin.Email);
+                if (existingUser != null)
+                {
+                    var isPasswordVerified = CryptoUtil.VerifyPassword(requestLogin.Password, existingUser.Salt, existingUser.Password);
+                    if (isPasswordVerified)
+                    {
+                        var claimList = new List<Claim>();
+                        claimList.Add(new Claim(ClaimTypes.Name, existingUser.Email));
+                        claimList.Add(new Claim(ClaimTypes.Role, existingUser.Role));
+                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SecretKey"]));
+                        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                        var expireDate = DateTime.UtcNow.AddDays(1);
+                        var timeStamp = DateUtil.ConvertToTimeStamp(expireDate);
+                        var token = new JwtSecurityToken(
+                            claims: claimList,
+                            notBefore: DateTime.UtcNow,
+                            expires: expireDate,
+                            signingCredentials: creds);
+                        responseLogin.Success = true;
+                        responseLogin.Token = new JwtSecurityTokenHandler().WriteToken(token);
+                        responseLogin.ExpireDate = timeStamp;
+                    }
+                    else
+                    {
+                        responseLogin.MessageList.Add("Senha errada");
+                    }
+                }
+                else
+                {
+                    responseLogin.MessageList.Add("E-mail errado");
+                }
             }
             return responseLogin;
         }
@@ -78,7 +94,7 @@ namespace backend.Controllers
                 }
                 else
                 {
-                    responseRegister.MessageList.Add("Email is already in use");
+                    responseRegister.MessageList.Add("Este e-mail já existe.");
                 }
             }
             return responseRegister;
