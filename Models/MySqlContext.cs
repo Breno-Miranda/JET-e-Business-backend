@@ -14,6 +14,7 @@ namespace Backend.Models
         }
 
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
