@@ -9,7 +9,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
-
+using Backend.Core.Responses;
+using Backend.Core.Requests;
+using Backend.Core.Request;
+using Backend.Models;
 
 namespace backend.Controllers
 {

@@ -1,3 +1,5 @@
+using Backend.Core.Requests;
+
 namespace Backend.Core.Request
 {
     public class RequestRegister : BaseRequest

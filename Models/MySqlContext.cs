@@ -2,13 +2,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Models
 {
-    public partial class NetCoreAuthJwtMySqlContext : DbContext
+    public partial class MySqlContext : DbContext
     {
-        public NetCoreAuthJwtMySqlContext()
+        public MySqlContext()
         {
         }
 
-        public NetCoreAuthJwtMySqlContext(DbContextOptions<NetCoreAuthJwtMySqlContext> options)
+        public MySqlContext(DbContextOptions<MySqlContext> options)
             : base(options)
         {
         }
