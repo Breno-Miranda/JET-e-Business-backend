@@ -12080,11 +12080,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/var/www/brenomirandaster.local/jet-ecommerce/backend/backend.csproj",
+      "projectUniqueName": "/var/www/brenomirandaster.local/jet-ecommerce/Backend/backend.csproj",
       "projectName": "backend",
-      "projectPath": "/var/www/brenomirandaster.local/jet-ecommerce/backend/backend.csproj",
+      "projectPath": "/var/www/brenomirandaster.local/jet-ecommerce/Backend/backend.csproj",
       "packagesPath": "/home/brenosan/.nuget/packages/",
-      "outputPath": "/var/www/brenomirandaster.local/jet-ecommerce/backend/obj/",
+      "outputPath": "/var/www/brenomirandaster.local/jet-ecommerce/Backend/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"
