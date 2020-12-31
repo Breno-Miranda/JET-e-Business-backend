@@ -1,7 +1,8 @@
+using Backend.Core.Requests;
 
-namespace Backend.Models
+namespace Backend.Core.Request
 {
-    public partial class Product
+    public class RequestRegisterProduct : BaseRequest
     {
         public int Id { get; set; }
         public int Category_id { get; set; }
