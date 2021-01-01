@@ -91,14 +91,12 @@ namespace Backend.Models
                 entity.Property(e => e.Price)
                     .IsRequired()
                     .HasColumnName("price")
-                    .HasColumnType("varchar(20)")
-                    .HasDefaultValueSql("'0'");
+                    .HasColumnType("decimal(5,2)");
 
                 entity.Property(e => e.Discount)
                     .IsRequired()
                     .HasColumnName("discount")
-                    .HasColumnType("varchar(20)")
-                    .HasDefaultValueSql("'0'");
+                    .HasColumnType("decimal(5,2)");
 
                  entity.Property(e => e.Stock)
                     .IsRequired()

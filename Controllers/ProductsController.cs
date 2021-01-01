@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Backend.Core.Responses;
-using Backend.Core.Requests;
 using Backend.Core.Request;
 using Backend.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using System;
 
 namespace backend.Controllers
 {
@@ -13,20 +15,19 @@ namespace backend.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        public ProductsController(IConfiguration configuration )
+        public ProductsController()
         {
-            _configuration = configuration;
+            
         }
 
         [AllowAnonymous]
-        [HttpPost]
-        [Route("/")]
-        public ActionResult<ResponseLogin> Get(RequestLogin requestLogin)
+        [HttpGet]
+        public async Task<object> Index()
         {
-            var responseLogin = new ResponseLogin();
-            
-            return responseLogin;
+            using (var db = new MySqlContext())
+            {
+                return  await db.Product.ToListAsync();
+            }
         }
         
         [AllowAnonymous]
@@ -35,7 +36,6 @@ namespace backend.Controllers
         public ActionResult<ResponseRegister> Register(RequestRegisterProduct requestRegisterProduct)
         {
             var responseRegister = new ResponseRegister();
-
             using (var db = new MySqlContext())
             {
                 var category_id = requestRegisterProduct.Category_id;
@@ -53,8 +53,8 @@ namespace backend.Controllers
                 product.Category_id = category_id;
                 product.Title = title;
                 product.Description = description;
-                product.Price = price;
-                product.Discount = discount;
+                product.Price =  Decimal.Parse(price);
+                product.Discount = Decimal.Parse(discount);
                 product.Stock = stock;
                 product.Url_image = url_image;
                 product.Is_promotion = is_promotion;
@@ -64,7 +64,6 @@ namespace backend.Controllers
                 db.SaveChanges();
                 responseRegister.Success = true;
             }
-
             return responseRegister;
         }
     }
