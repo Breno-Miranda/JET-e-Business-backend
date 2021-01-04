@@ -15,6 +15,7 @@ namespace Backend.Models
 
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Product> Product { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,11 +27,10 @@ namespace Backend.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Users
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("users");
-
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -61,12 +61,11 @@ namespace Backend.Models
             });
 
 
-
+            // Products
             modelBuilder.Entity<Product>(entity =>
             {
+
                 entity.ToTable("products");
-
-
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("int(11)");
@@ -122,6 +121,59 @@ namespace Backend.Models
                     .HasColumnType("boolean")
                     .HasDefaultValueSql("'0'");
             });
+
+
+             // Categorys
+            modelBuilder.Entity<Category>(entity =>
+            {
+
+                entity.ToTable("categorys");
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasColumnName("title")
+                    .HasColumnType("varchar(128)")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasColumnName("description")
+                    .HasColumnType("varchar(20)")
+                    .HasDefaultValueSql("'0'");
+
+                entity.Property(e => e.Discount)
+                    .IsRequired()
+                    .HasColumnName("discount")
+                    .HasColumnType("decimal(5,2)");
+
+                 entity.Property(e => e.Stock)
+                    .IsRequired()
+                    .HasColumnName("stock")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'0'");
+
+                 entity.Property(e => e.Url_image)
+                    .IsRequired()
+                    .HasColumnName("url_image")
+                    .HasColumnType("varchar(36)")
+                    .HasDefaultValueSql("'0'");
+
+                 entity.Property(e => e.Is_promotion)
+                    .IsRequired()
+                    .HasColumnName("is_promotion")
+                    .HasColumnType("boolean")
+                    .HasDefaultValueSql("'0'");
+
+                 entity.Property(e => e.Is_activate)
+                    .IsRequired()
+                    .HasColumnName("is_activate")
+                    .HasColumnType("boolean")
+                    .HasDefaultValueSql("'0'");
+            });
+
         }
     }
 }
