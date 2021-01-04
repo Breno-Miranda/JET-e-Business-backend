@@ -7,7 +7,6 @@ namespace Backend.Models
     public partial class Category
     {
         public int Id { get; set; }
-        public int Category_id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
