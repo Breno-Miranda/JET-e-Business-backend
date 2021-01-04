@@ -1,12 +1,11 @@
 ﻿
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Backend.Core.Responses;
 using Backend.Core.Request;
 using Backend.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 using System;
 
 namespace backend.Controllers
