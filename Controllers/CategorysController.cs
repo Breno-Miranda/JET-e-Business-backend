@@ -26,7 +26,7 @@ namespace backend.Controllers
         {
             using (var db = new MySqlContext())
             {
-                return await db.Product.ToListAsync();
+                return await db.Category.ToListAsync();
             }
         }
 
