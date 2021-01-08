@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Backend.Core.Responses;
-using Backend.Core.Request;
 using Backend.Models;
 using System;
+using System.Linq;
 using Backend.Services.Request;
 
 namespace backend.Controllers
@@ -22,11 +22,11 @@ namespace backend.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<object> Index()
+        public async Task<object>  Index()
         {
             using (var db = new MySqlContext())
             {
-                return await db.Category.ToListAsync();
+                return await db.Category.Take(8).ToListAsync();
             }
         }
 
