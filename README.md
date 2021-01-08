@@ -58,6 +58,52 @@ $ dotnet build
 $ dotnet run 
 ```
 
+#### MYSQL (SCRIPT)
+
+
+```sh
+create database jetecommerce;
+
+use jetecommerce;
+
+CREATE TABLE IF NOT EXISTS users (
+  id int(11) NOT NULL AUTO_INCREMENT primary key,
+  email varchar(50) NOT NULL DEFAULT '0',
+  salt varchar(36) NOT NULL DEFAULT '0',
+  password varchar(128) NOT NULL DEFAULT '0',
+  role varchar(20) NOT NULL DEFAULT '0'
+) ;
+
+
+CREATE TABLE IF NOT EXISTS  categorys(
+	id int not null auto_increment primary key,
+    title varchar(255) not null,
+    description longtext not null,
+    discount decimal(10, 2) null,
+    stock int not null default 0,
+    url_image varchar(255) not null,
+    date_time timestamp not null,
+    is_promotion boolean not null default false,
+    is_activate boolean not null default false
+);
+
+CREATE TABLE IF NOT EXISTS  products(
+	id int not null auto_increment primary key,
+    category_id int not null,
+    title varchar(255) not null,
+    description longtext not null,
+    price decimal(10, 2) not null,
+    discount decimal(10, 2) null,
+    stock int not null default 0,
+    url_image varchar(255) not null,
+    date_time timestamp not null,
+    is_promotion boolean not null default false,
+    is_activate boolean not null default false
+);
+
+```
+
+
 ### Plugins
 
 Os Plugins utilizados foram:
