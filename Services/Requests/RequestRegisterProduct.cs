@@ -1,6 +1,6 @@
 using Backend.Core.Requests;
 
-namespace Backend.Core.Request
+namespace Backend.Services.Request
 {
     public class RequestRegisterProduct : BaseRequest
     {
