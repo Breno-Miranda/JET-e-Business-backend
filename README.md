@@ -1,4 +1,4 @@
-# JET e-Business (angular 11+)
+# JET e-Business (DOTNET 2.2)
 
 ![JET e-Business](https://media-exp1.licdn.com/dms/image/C4D0BAQF5iiNwyoa2bw/company-logo_200_200/0/1543317822795?e=2159024400&v=beta&t=ZR3A_pya3b11HpUGONQAdRJUVtbCo1hJ94nDX1rgkE8)
 
